@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+<title>LA AVENTURA DE ALBA Y SOFIA</title>
+<!-- Invite-only: this page is deliberately kept out of search results. -->
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" href="/the-wedding-game/favicon.ico" sizes="any" />
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #120B2E;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+  }
+  #game {
+    display: block;
+    border: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+  }
+</style>
+</head>
+<body>
+<!-- The game itself lives in the wedding repo (the-wedding-game/alba-sofia/);
+     this page only shows it full-screen under a shorter address. Both are on
+     pilarestebango.github.io, so the frame is same-origin. -->
+<iframe id="game" title="La aventura de Alba y Sofia" allow="autoplay; fullscreen"></iframe>
+<script>
+  var GAME_URL = '/the-wedding-game/alba-sofia/';
+  var frame = document.getElementById('game');
+
+  // Pass ?scene=...&char=... debug jumps through to the game.
+  frame.src = GAME_URL + window.location.search;
+
+  frame.addEventListener('load', function () {
+    // Keyboard input goes to whichever document has focus.
+    frame.focus();
+    // The game's EXIT link leaves for the wedding site: follow it in the
+    // whole tab instead of showing the site inside the frame.
+    try {
+      var inner = frame.contentWindow.location;
+      if (inner.pathname.indexOf(GAME_URL) !== 0) window.location.href = inner.href;
+    } catch (e) {
+      // not readable (different origin) — leave it be
+    }
+  });
+</script>
+</body>
+</html>
